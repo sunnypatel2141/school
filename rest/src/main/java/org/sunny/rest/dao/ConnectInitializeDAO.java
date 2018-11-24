@@ -5,18 +5,18 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public class ConnectionDAO {
+public class ConnectInitializeDAO {
 
 	private Connection connect;
 	private final String user;
 	private final String password;
 	private final String host;
 	
-	public ConnectionDAO(String username, String password) {
+	public ConnectInitializeDAO(String username, String password) {
 		this(username, password, "localhost");
 	}
 
-	public ConnectionDAO(String username, String password, String host) {
+	public ConnectInitializeDAO(String username, String password, String host) {
 		this.user = Objects.requireNonNull(username);
 		this.password = Objects.requireNonNull(password);
 		this.host = Objects.requireNonNull(host);

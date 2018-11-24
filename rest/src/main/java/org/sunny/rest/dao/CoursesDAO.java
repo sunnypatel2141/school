@@ -17,7 +17,8 @@ public class CoursesDAO {
 
 	private final List<String> listOfCourses;
 
-	private static final String ADD_COURSES = "INSERT INTO COURSES VALUES (?, ?)";
+	//course code(8), year start(4), year end(4), semester(1)
+	private static final String ADD_COURSES = "INSERT INTO COURSES VALUES (?, ?, ?, ?)";
 	
 	public CoursesDAO(Connection connection)
 	{
@@ -30,15 +31,16 @@ public class CoursesDAO {
 		return Collections.unmodifiableList(listOfCourses);
 	}
 	
-	public void addCourse(String course) throws SQLException
+	public void addCourse(String course, int startYear, int endYear, String semester) throws SQLException
 	{	
 		// Statements allow to issue SQL queries to the database
 		PreparedStatement preparedStatement = connection.prepareStatement(ADD_COURSES);
         
 		preparedStatement.setString(1, course);
-        preparedStatement.setTimestamp(2, new Timestamp(System.currentTimeMillis()), Calendar.getInstance());
-        
-        
-	
+		preparedStatement.setInt(2, startYear);
+		preparedStatement.setInt(3, endYear);
+		preparedStatement.setString(4, semester);
+         
+		preparedStatement.executeUpdate();
 	}
 }
